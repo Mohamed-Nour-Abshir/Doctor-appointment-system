@@ -5,6 +5,6 @@ Dear {{ $mailData['name'] }},
 <p>Time: {{ $mailData['time'] }}</p>
 <p>Doctor: {{ $mailData['doctorName'] }}</p>
 <br>
-Location: 313 No Name Road, California, 14152
+Location: grean Road, panthapath, Dhaka, Bangladesh
 <br>
-Contact: 123 213-1234
+Contact: 01793798432

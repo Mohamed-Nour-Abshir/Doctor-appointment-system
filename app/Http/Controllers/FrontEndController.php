@@ -9,6 +9,7 @@ use App\User;
 use App\Booking;
 use App\Prescription;
 use App\Mail\AppointmentMail;
+use Illuminate\Support\Facades\Mail;
 
 class FrontEndController extends Controller
 {
@@ -72,7 +73,7 @@ class FrontEndController extends Controller
             'doctorName' => $doctor->name
         ];
         try {
-            \Mail::to(auth()->user()->email)->send(new AppointmentMail($mailData));
+            Mail::to(auth()->user()->email)->send(new AppointmentMail($mailData));
         } catch (\Exception $e) {
         }
 
