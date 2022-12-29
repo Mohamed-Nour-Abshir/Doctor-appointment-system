@@ -16,7 +16,7 @@ class FrontEndController extends Controller
     public function index(Request $request)
     {
         // Set timezone
-        date_default_timezone_set('America/New_York');
+        date_default_timezone_set('Asia/Dhaka');
         // If there is set date, find the doctors
         if (request('date')) {
             $formatDate = date('m-d-Y', strtotime(request('date')));

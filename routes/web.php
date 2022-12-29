@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AllSubPagesController;
 use App\Http\Controllers\FrontEndController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 // Home Page Routes
@@ -10,7 +12,14 @@ Route::get('/new-appointment/{doctorId}/{date}', 'FrontEndController@show')->nam
 
 Route::get('/dashboard', 'DashBoardController@index');
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('dashboard');
+
+// sub pages
+Route::get('/about', [AllSubPagesController::class, 'about'])->name('about');
+Route::get('/doctors', [AllSubPagesController::class, 'doctor'])->name('doctors');
+Route::get('/news', [AllSubPagesController::class, 'news'])->name('news');
+Route::get('/news-details', [AllSubPagesController::class, 'newsDetails'])->name('news-details');
+Route::get('/contact', [AllSubPagesController::class, 'contact'])->name('contact');
 
 Auth::routes();
 
