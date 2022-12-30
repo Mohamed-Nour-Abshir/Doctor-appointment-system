@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">My appointments: {{ $appointments->count() }}</div>
+                    <div class="card-header">Appointments: {{ $appointments->count() }}</div>
 
                     <div class="card-body table-responsive-sm">
                         <table class="table table-striped">
@@ -21,20 +21,22 @@
                             </thead>
                             <tbody>
                                 @forelse($appointments as $key=>$appointment)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $appointment->doctor->name }}</td>
-                                        <td>{{ $appointment->time }}</td>
-                                        <td>{{ $appointment->date }}</td>
-                                        <td>{{ $appointment->created_at->format('m-d-Y') }}</td>
-                                        <td>
-                                            @if ($appointment->status == 0)
-                                                <p>Not Visited</p>
-                                            @else
-                                                <p>Checked-In</p>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                @if ($appointment->status == 0)
+                                <tr>
+                                    <td>{{ $appointment->id }}</td>
+                                    <td>{{ $appointment->doctor->name }}</td>
+                                    <td>{{ $appointment->time }}</td>
+                                    <td>{{ $appointment->date }}</td>
+                                    <td>{{ $appointment->created_at->format('m-d-Y') }}</td>
+                                    <td>
+                                        @if ($appointment->status == 0)
+                                            <p class="btn btn-warning btn-sm">pending</p>
+                                        @else
+                                            <p>Checked-In</p>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endif
                                 @empty
                                     <td>You have no any appointments</td>
                                 @endforelse

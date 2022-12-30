@@ -22,9 +22,14 @@
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </div>
                             </div>
-
                         </div>
                     </form>
+
+                    <div class="btn-group d-flex justify-content-center mt-3" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-success" name="start">Start</button>
+                        <button type="button" class="btn btn-warning" name="pause">Pause</button>
+                        <button type="button" class="btn btn-danger" name="end">End</button>
+                      </div>
 
                     <div class="card-body table-responsive-lg">
                         <table class="table table-striped">

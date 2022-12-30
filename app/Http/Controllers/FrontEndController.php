@@ -9,6 +9,7 @@ use App\User;
 use App\Booking;
 use App\Prescription;
 use App\Mail\AppointmentMail;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
 class FrontEndController extends Controller
@@ -18,22 +19,22 @@ class FrontEndController extends Controller
         // Set timezone
         date_default_timezone_set('Asia/Dhaka');
         // If there is set date, find the doctors
-        if (request('date')) {
-            $formatDate = date('m-d-Y', strtotime(request('date')));
-            $doctors = Appointment::where('date', $formatDate)->get();
+        if (request('search')) {
+            $searchDocotor = request('search');
+            $doctors = User::where('name', $searchDocotor)->orwhere('department', $searchDocotor)->get();
             $users  = User::where('role_id', 1)->get();
-            return view('welcome', compact('doctors', 'formatDate', 'users'));
+            return view('welcome', compact('doctors', 'searchDocotor', 'users'));
         }
         // Get the doctor info
         // Return all doctors avalable for today to the welcome page
-        $doctors = Appointment::where('date', date('m-d-Y'))->get();
+        $doctors = User::where('name')->get();
         $users  = User::where('role_id', 1)->get();
         return view('welcome', compact('doctors', 'users'));
     }
 
     public function show($doctorId, $date)
     {
-        $appointment = Appointment::where('user_id', $doctorId)->where('date', $date)->first();
+        $appointment = Appointment::where('user_id', $doctorId)->first();
         $times = Time::where('appointment_id', $appointment->id)->where('status', 0)->get();
         $user = User::where('id', $doctorId)->first();
         $doctor_id = $doctorId;
@@ -54,7 +55,7 @@ class FrontEndController extends Controller
         $doctorId = $request->doctorId;
         $time = $request->time;
         $appointmentId = $request->appointmentId;
-        $date = $request->date;
+        $date = Carbon::today()->toDateString();
         Booking::create([
             'user_id' => auth()->user()->id,
             'doctor_id' => $doctorId,
@@ -91,7 +92,7 @@ class FrontEndController extends Controller
 
     public function myBookings()
     {
-        $appointments = Booking::latest()->where('user_id', auth()->user()->id)->get();
+        $appointments = Booking::all();
         return view('booking.index', compact('appointments'));
     }
 

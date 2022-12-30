@@ -35,7 +35,7 @@
 
                 <form action="{{ route('book.appointment') }}" method="post">@csrf
                     <div class="card">
-                        <div class="card-header lead">Appointment Date: {{ $date }}</div>
+                        <div class="card-header lead">Appointment with Doctor: {{ $date }}</div>
                         <div class="card-body">
                             <div class="row">
                                 @foreach ($times as $time)
