@@ -6,7 +6,17 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Appointments: {{ $appointments->count() }}</div>
-
+                        @foreach ($doctor_status as $item)
+                            @if ($item->doctor_status == 'started')
+                            <p class="bg-success text-center text-light p-3">Doctor has now {{$item->doctor_status}} watching the patients</p>
+                            @elseif ($item->doctor_status == 'paused')
+                            <p class="bg-primary text-center text-light">Doctor is taking some break please wait for a while</p>
+                            @elseif ($item->doctor_status == 'closed')
+                            <p class="bg-danger text-center text-light">Doctor has {{$item->doctor_status}} watching the patients</p>
+                            @else
+                            <p class="bg-warning text-center">waiting</p>
+                            @endif
+                        @endforeach
                     <div class="card-body table-responsive-sm">
                         <table class="table table-striped">
                             <thead>

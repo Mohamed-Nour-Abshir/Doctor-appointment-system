@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('doctor_statuses', function (Blueprint $table) {
             $table->id();
-            $table->integer('status')->default(0);
+            $table->string('doctor_status')->default('waiting');
             $table->timestamps();
         });
     }

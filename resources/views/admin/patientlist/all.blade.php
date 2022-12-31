@@ -22,9 +22,23 @@
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </div>
                             </div>
-
                         </div>
                     </form>
+                        <div class="btn-group d-flex justify-content-center mt-3" role="group" aria-label="Basic mixed styles example">
+                            @foreach($doctor_status as $item)
+                            @if ($item->doctor_status === 'waiting')
+                                <a href="{{route('update.doctorstatusStarted', [$item->id])}}" class="btn btn-success" name="start">Start</a>
+                            @elseif ($item->doctor_status === 'started')
+                                 <a href="{{route('update.doctorstatusPaused', [$item->id])}}" class="btn btn-warning" name="pause">Pause</a>
+                                 <a href="{{route('update.doctorstatusEnded', [$item->id])}}" class="btn btn-danger" name="end">End</a>
+                            @elseif ($item->doctor_status === 'paused')
+                                <a href="{{route('update.doctorstatusStarted', [$item->id])}}" class="btn btn-success" name="start">Start</a>
+                                <a href="{{route('update.doctorstatusEnded', [$item->id])}}" class="btn btn-danger" name="end">End</a>
+                            @else
+                                <a href="{{route('update.doctorstatusStarted', [$item->id])}}" class="btn btn-success" name="start">Start</a>
+                            @endif
+                            @endforeach
+                          </div>
 
                     <div class="card-body table-responsive-lg">
                         <table class="table table-striped">

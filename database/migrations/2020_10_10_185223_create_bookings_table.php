@@ -21,6 +21,7 @@ class CreateBookingsTable extends Migration
             $table->string('time');
             $table->string('date');
             $table->integer('status')->default(0);
+            $table->string('doctor_status')->default('waiting');
 
             $table->timestamps();
         });

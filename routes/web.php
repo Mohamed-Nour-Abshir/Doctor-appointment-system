@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AllSubPagesController;
 use App\Http\Controllers\FrontEndController;
+use App\Http\Controllers\PatientListController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +55,9 @@ Route::group(['middleware' => ['auth', 'doctor']], function () {
 
     Route::get('/patients', 'PatientListController@index')->name('patients');
     Route::get('/status/update/{id}', 'PatientListController@toggleStatus')->name('update.status');
+    Route::get('/doctorstatusStarted/update/{id}', 'PatientListController@toggleDoctorStatusStarted')->name('update.doctorstatusStarted');
+    Route::get('/doctorstatusPaused/update/{id}', 'PatientListController@toggleDoctorStatusPused')->name('update.doctorstatusPaused');
+    Route::get('/doctorstatusEnded/update/{id}', 'PatientListController@toggleDoctorStatusEnded')->name('update.doctorstatusEnded');
     Route::get('/all-patients', 'PatientListController@allTimeAppointment')->name('all.appointments');
 });
 

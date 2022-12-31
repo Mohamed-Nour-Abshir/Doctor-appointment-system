@@ -31,8 +31,6 @@ class PatientObserver
         if ($booking->getOriginal('status') == false && $booking->status == true) {
             //send mail to user that shop activated
             Mail::to(auth()->user()->email)->send(new DoctorCallPatient($booking));
-        } else {
-            dd('error');
         }
     }
 

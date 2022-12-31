@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\PatientListController;
 use Illuminate\Http\Request;
 use App\Appointment;
 use App\Time;
@@ -9,6 +10,7 @@ use App\User;
 use App\Booking;
 use App\Prescription;
 use App\Mail\AppointmentMail;
+use App\Models\DoctorStatus;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 
@@ -92,8 +94,11 @@ class FrontEndController extends Controller
 
     public function myBookings()
     {
+        // $controller = new PatientListController;
+        // $result = $controller->printStatusMessage();
         $appointments = Booking::all();
-        return view('booking.index', compact('appointments'));
+        $doctor_status = DoctorStatus::all();
+        return view('booking.index', compact('appointments', 'doctor_status'));
     }
 
     public function myPrescription()

@@ -67,19 +67,19 @@
         <div class="collapse navbar-collapse" id="navbarSupport">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="/" class="nav-link{{ request()->is('*/*') ? 'active' : '' }}">Home</a>
+              <a href="/" class="nav-link {{ request()->is('*/*') ? 'active' : '' }}">Home</a>
             </li>
             <li class="nav-item">
               <a href="/about" class="nav-link {{ request()->is('*about*') ? 'active' : '' }}">About Us</a>
             </li>
             <li class="nav-item">
-              <a href="/doctors" class="nav-link{{ request()->is('*doctors*') ? 'active' : '' }}">Doctors</a>
+              <a href="/doctors" class="nav-link {{ request()->is('*doctors*') ? 'active' : '' }}">Doctors</a>
             </li>
             <li class="nav-item">
-              <a href="/news" class="nav-link{{ request()->is('*news*') ? 'active' : '' }}">News</a>
+              <a href="/news" class="nav-link {{ request()->is('*news*') ? 'active' : '' }}">News</a>
             </li>
             <li class="nav-item">
-              <a href="/contact" class="nav-link{{ request()->is('*contact*') ? 'active' : '' }}">Contact</a>
+              <a href="/contact" class="nav-link {{ request()->is('*contact*') ? 'active' : '' }}">Contact</a>
             </li>
 
             <!-- Right Side Of Navbar -->
@@ -110,7 +110,7 @@
                                 </a>
                             @else
                                 <a class="dropdown-item" href="{{ route('my.booking') }}">
-                                    {{ __('My Appointments') }}
+                                    {{ __('Appointments') }}
                                 </a>
                                 <a class="dropdown-item" href="{{ route('my.prescription') }}">
                                     {{ __('My Prescriptions') }}

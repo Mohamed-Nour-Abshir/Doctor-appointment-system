@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Booking;
+use App\Models\DoctorStatus;
 use Illuminate\Support\Facades\Auth;
 
 class PatientListController extends Controller
@@ -33,15 +34,40 @@ class PatientListController extends Controller
         $booking->save();
         return redirect()->back();
     }
+    public function toggleDoctorStatusStarted($id)
+    {
+        $booking = DoctorStatus::find($id);
+        $booking->doctor_status = 'started';
+        $booking->save();
+        return redirect()->back();
+    }
+
+    public function toggleDoctorStatusPused($id)
+    {
+        $booking = DoctorStatus::find($id);
+        $booking->doctor_status = 'paused';
+        $booking->save();
+        return redirect()->back();
+    }
+
+    public function toggleDoctorStatusEnded($id)
+    {
+        $booking = DoctorStatus::find($id);
+        $booking->doctor_status = 'closed';
+        $booking->save();
+        return redirect()->back();
+    }
 
     public function allTimeAppointment()
     {
         if (Auth()->user()->role_id === 2) {
-            $bookings = Booking::latest()->paginate(20);
+            $bookings = Booking::all()->paginate(20);
+            $doctor_status = DoctorStatus::all();
         } else {
-            $bookings = Booking::latest()->where('doctor_id', auth()->user()->id)->paginate(20);
+            $bookings = Booking::where('doctor_id', auth()->user()->id)->paginate(20);
+            $doctor_status = DoctorStatus::all();
         }
 
-        return view('admin.patientlist.all', compact('bookings'));
+        return view('admin.patientlist.all', compact('bookings', 'doctor_status'));
     }
 }
